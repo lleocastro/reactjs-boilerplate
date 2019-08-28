@@ -19,14 +19,14 @@ axios.interceptors.response.use((response) => response, (error) => {
 
 export default axios;
 
-export const graphqlQueryBuilder = (query, variables) => ({
-  query: query.replace(/\s/g, ''),
+export const makeGraphqlQuery = (query, variables) => ({
+  query,
   variables,
 });
 
 export const graphql = (query, variables, params = {}) => axios({
   method: 'POST',
   url: process.env.API_BASE_URL,
-  data: graphqlQueryBuilder(query, variables),
+  data: makeGraphqlQuery(query, variables),
   ...params,
 });
